@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class marimo  extends Frame implements ActionListener{
-	Button b1 =new Button("버튼");
+	Button b1 =new Button("버튼눌러");
 	Panel p = new Panel();
 	public marimo() {
 		super("Mrimo");

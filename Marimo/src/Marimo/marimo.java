@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class marimo  extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/{
 	private Image background=new ImageIcon(marimo.class.getResource("../img/KakaoTalk_20221025_111559538_01.jpg")).getImage();//배경이미지
-
+ 
 	public marimo() {
 		homeframe();
 	}

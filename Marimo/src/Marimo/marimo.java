@@ -7,9 +7,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 public class marimo  extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/{
-	private Image background=new ImageIcon(marimo.class.getResource("../img/background.png")).getImage();//배경이미지
+	private Image background=new ImageIcon(marimo.class.getResource("../img/night.png")).getImage();//배경이미지
 	/*생성자*/
-	
+
 	public marimo() {
 		homeframe();
 	}

@@ -5,9 +5,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class day_marimo  extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/{
-	private Image background=new ImageIcon(day_marimo.class.getResource("../img/KakaoTalk_20221025_111559538_01.jpg")).getImage();//배경이미지
- 
+public class day_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/{
+	private Image background=new ImageIcon(day_marimo.class.getResource("../img/day.png")).getImage();//배경이미지
+	private Image marimo = new ImageIcon(day_marimo.class.getResource("../img/marimo.png")).getImage();
 	public day_marimo() {
 		homeframe();
 	}
@@ -22,6 +22,7 @@ public class day_marimo  extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*
 	}
 	public void paint(Graphics g) {//그리는 함수
 		g.drawImage(background, 0, 0, null);//background를 그려줌
+		g.drawImage(marimo, 250, 580, null);
 	}
 	public static void main(String args[]) {
 		new day_marimo();

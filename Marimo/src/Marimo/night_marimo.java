@@ -6,8 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class night_marimo  extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/{
-	private Image background=new ImageIcon(day_marimo.class.getResource("../img/night.png")).getImage();//배경이미지
-	private Image marimo = new ImageIcon(day_marimo.class.getResource("../img/sleep_marimo.png")).getImage();
+	private Image background=new ImageIcon(night_marimo.class.getResource("../img/night.png")).getImage();//배경이미지
+	private Image marimo = new ImageIcon(night_marimo.class.getResource("../img/sleep_marimo.png")).getImage();
 	public night_marimo() {
 		homeframe();
 	}

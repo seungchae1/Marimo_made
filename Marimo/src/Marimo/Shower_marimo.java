@@ -6,10 +6,10 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Shower_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/{
-	private Image background=new ImageIcon(day_marimo.class.getResource("../img/sh.png")).getImage();//배경이미지
-	private Image marimo = new ImageIcon(day_marimo.class.getResource("../img/shower_marimo.png")).getImage();
-	private Image sh = new ImageIcon(day_marimo.class.getResource("../img/sh_2.png")).getImage();
-	private Image b = new ImageIcon(day_marimo.class.getResource("../img/boll.png")).getImage();
+	private Image background=new ImageIcon(Shower_marimo.class.getResource("../img/sh.png")).getImage();//배경이미지
+	private Image marimo = new ImageIcon(Shower_marimo.class.getResource("../img/shower_marimo.png")).getImage();
+	private Image sh = new ImageIcon(Shower_marimo.class.getResource("../img/sh_2.png")).getImage();
+	private Image b = new ImageIcon(Shower_marimo.class.getResource("../img/boll.png")).getImage();
 	public Shower_marimo() {
 		homeframe();
 	}

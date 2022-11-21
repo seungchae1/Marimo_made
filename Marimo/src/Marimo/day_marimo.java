@@ -25,7 +25,8 @@ public class day_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//JFrame이 정상적으로 종료되게
 		
 
-	}
+	} 
+	
 	public void paint(Graphics g) {//그리는 함수
 		g.drawImage(background, 0, 0, null);//background를 그려줌
 		g.drawImage(marimo, 250, 580, null);

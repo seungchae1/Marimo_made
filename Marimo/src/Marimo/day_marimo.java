@@ -18,7 +18,7 @@ public class day_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/
 	public void homeframe() {
 		setTitle("마리모 키우기");//타이틀
 		setSize(725,1024);
-		setResizable(false);//창의 크기를 변경하지 못하게
+		setResizable(false);//창의 크기를 변경하지 못하게 
 		setLocationRelativeTo(null);//창이 가운데 나오게
 		setLayout(null);//레이아웃을 내맘대로 설정가능하게 해줌.
 		setVisible(true);//창이 보이게	

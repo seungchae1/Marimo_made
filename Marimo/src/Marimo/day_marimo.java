@@ -65,9 +65,8 @@ public class day_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/
       sun_panel.add(sun);
       
       add(main_panel); // 메인 프레임에 메인패널을 붙여주는 작업
-      add(sun_panel);
+      add(sun_panel);  // 메인 프레임에 썬패널 붙여주는 작업
       setVisible(true); // 프레임 보이게 하기
-
    }
    public void paint(Graphics g) {//그리는 함수
       g.drawImage(background, 0, 0, null);//background를 그려줌

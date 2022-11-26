@@ -78,7 +78,8 @@ public class day_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/
    @Override
    public void actionPerformed(ActionEvent e) {
       if(e.getSource()==btn4) {
-         Shower_marimo a = new Shower_marimo();
+         Shower_marimo shower = new Shower_marimo();
+         setVisible(false); 
       }
    }
 }

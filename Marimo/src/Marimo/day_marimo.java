@@ -56,7 +56,9 @@ public class day_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/
       btn4.setBackground(new Color(136,199,162,255)); //샤워
       sun.setBackground(new Color(0,206,255));
       
+      btn.addActionListener(this);
       btn4.addActionListener(this);
+      sun.addActionListener(this);
       
       main_panel.add(btn3); // 패널에 버튼을 붙여준다
       main_panel.add(btn4); // 패널에 버튼을 붙여준다
@@ -80,6 +82,14 @@ public class day_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/
       if(e.getSource()==btn4) {
          Shower_marimo shower = new Shower_marimo();
          setVisible(false); 
+      }
+      else if(e.getSource() == sun) {
+    	  night_marimo c = new night_marimo();
+          setVisible(false); 
+      }
+      else if(e.getSource() == btn) {
+    	  Reallyboll_marimo a = new Reallyboll_marimo();
+          setVisible(false); 
       }
    }
 }

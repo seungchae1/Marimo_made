@@ -122,10 +122,6 @@ public class Shower_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임
 		// TODO Auto-generated method stub
 		super.paintComponents(g);
 	}
-	
-	@Override
-	public void update(Graphics g) {
-	}
 	public static void main(String args[]) {
 		new Shower_marimo();
 	}

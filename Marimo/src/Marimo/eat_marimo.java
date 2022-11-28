@@ -81,6 +81,7 @@ public class eat_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/
 	      eat_m.addActionListener(this);
 	      btn4.addActionListener(this);
 	      btn3.addActionListener(this);
+	      sun.addActionListener(this);
 	      
 	      main_panel.add(btn3); // 패널에 버튼을 붙여준다
 	      main_panel.add(btn4); // 패널에 버튼을 붙여준다
@@ -165,7 +166,7 @@ public class eat_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/
 	         setVisible(false); 
 	      }
 	      else if(e.getSource() == sun) {
-	    	  night_marimo c = new night_marimo();
+	    	  day_marimo c = new day_marimo();
 	          setVisible(false); 
 	      }
 	      else if(e.getSource() == btn) {

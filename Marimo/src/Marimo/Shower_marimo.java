@@ -72,6 +72,7 @@ public class Shower_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임
 	      sun.setBackground(new Color(209,234,241,255));
 	      sh_ball.setBackground(new Color(209,234,241,255));
 	      
+	      sun.addActionListener(this);
 	      btn4.addActionListener(this);
 	      btn3.addActionListener(this);
 	      addMouseMotionListener(this);
@@ -135,16 +136,18 @@ public class Shower_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임
 			eat_marimo a = new eat_marimo();
 	         setVisible(false);
 		}
+	    else if(e.getSource() == sun) {
+	    	day_marimo a = new day_marimo();
+	        setVisible(false); 
+	    }
 	}
 	private int dragg_cnt=0;
-	private boolean isdragg = true;
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
 		dragg_cnt++;
-		if(dragg_cnt>=300 && isdragg) { 
+		if(dragg_cnt%300==0) { 
 			My_marimo.set_money(100); 
-			isdragg=false;
 			money_text.setText("money : "+Integer.toString(My_marimo.get_money()));	
 		}
 		

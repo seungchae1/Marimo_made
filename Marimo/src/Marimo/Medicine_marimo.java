@@ -1,26 +1,34 @@
 package Marimo;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/ implements ActionListener{
+public class Medicine_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/ implements ActionListener{
 	private Image background=new ImageIcon(Reallyboll_marimo.class.getResource("../img/boll_marimo.png")).getImage();//배경이미지
 	private Image marimo = new ImageIcon(Reallyboll_marimo.class.getResource("../img/marimo.png")).getImage();
-	private Image rb = new ImageIcon(Reallyboll_marimo.class.getResource("../img/icon_reallyboll.png")).getImage();
 	private ImageIcon btn_img = new ImageIcon(Reallyboll_marimo.class.getResource("../img/icon_reallyboll.png"));
 	private ImageIcon btn_img2 = new ImageIcon(Reallyboll_marimo.class.getResource("../img/icon_medicine.png"));
 	private ImageIcon btn_img3 = new ImageIcon(Reallyboll_marimo.class.getResource("../img/icon_refresh.png"));
 	private ImageIcon btn_img4 = new ImageIcon(Reallyboll_marimo.class.getResource("../img/icon_shower.png"));
+
 	
 	JPanel main_panel; // 버튼을 붙여질 메인 패널 선언
 	//JPanel sun_panel;
 	JButton btn, btn2, btn3, btn4, sun;
 	
-	public Reallyboll_marimo() {
+	public Medicine_marimo() {
 		homeframe();
 	}
+	
 	public void homeframe() {
 		setTitle("마리모 키우기");// 타이틀
 		setResizable(false);// 창의 크기를 변경하지 못하게
@@ -75,18 +83,17 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	public void paint(Graphics g) {//그리는 함수
 		g.drawImage(background, 0, 0, null);//background를 그려줌
 		g.drawImage(marimo, 250, 500, null);
-		g.drawImage(rb, 500, 200, null);
-	}
-	public static void main(String args[]) {
-		new Reallyboll_marimo();
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btn4) {
-			Shower_marimo a = new Shower_marimo();
-		}
-		if (e.getSource() == sun) {
-			day_marimo b = new day_marimo();
-		}
+	
+	public static void main(String[] args) {
+		new Medicine_marimo();
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		
+		
+	}
+
 }

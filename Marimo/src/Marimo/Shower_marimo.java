@@ -18,8 +18,6 @@ public class Shower_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임
 	private ImageIcon btn_sun = new ImageIcon(day_marimo.class.getResource("../img/sun.png"));
 	int s_x= 500, s_y=200; //샤워볼 위치
 	
-	
-	Point point = MouseInfo.getPointerInfo().getLocation();
 	   JPanel main_panel, sun_panel;
 	   JLabel money_text;
 	   JButton btn, btn2, btn3, btn4, sun, sh_ball;

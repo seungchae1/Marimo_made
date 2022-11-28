@@ -188,20 +188,17 @@ public class Medicine_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거
 	  		switch (sel) {
 	  		case 0:
 	  			My_marimo.set_health(+10);
-	  			health.setText(My_marimo.get_health());
 	  			break;
 	  		case 1:
 	  			My_marimo.set_health(+20);
-	  			health.setText(My_marimo.get_health());
 	  			break;
 	  		case 2:
 	  			My_marimo.set_health(+30);
-	  			health.setText(My_marimo.get_health());
 	  			break;
 	  		default:
 	  			break;
 	  		}
-  			money_text.setText("money : "+Integer.toString(My_marimo.get_money()));
+  			money_text.setText("money : "+Integer.toString(My_marimo.get_health()));
 	      }
 	   }
 

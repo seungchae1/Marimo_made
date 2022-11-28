@@ -69,6 +69,7 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	      sun.addActionListener(this);
 	      btn4.addActionListener(this);
 	      btn3.addActionListener(this);
+	      btn.addActionListener(this);
 	      addMouseListener(this);
 	      
 	      main_panel.add(btn3); // 패널에 버튼을 붙여준다
@@ -134,7 +135,7 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	        setVisible(false); 
 	    }
 	    else if(e.getSource() == btn) {
-	    	
+	    	s_x= 270; s_y=630;
 	    }
 	}
 	Random rd = new Random();

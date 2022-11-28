@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import Marimo.day_marimo.MyPanel;
+
 public class night_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. */ implements ActionListener{
 	private Image background = new ImageIcon(night_marimo.class.getResource("../img/night.png")).getImage();// 배경이미지
 	private Image marimo = new ImageIcon(night_marimo.class.getResource("../img/sleep_marimo.png")).getImage();
@@ -14,8 +16,9 @@ public class night_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임
 	private ImageIcon btn_img4 = new ImageIcon(night_marimo.class.getResource("../img/icon_shower.png"));
 	private ImageIcon btn_moon = new ImageIcon(night_marimo.class.getResource("../img/moon.png"));
 
-	JPanel main_panel; // 버튼을 붙여질 메인 패널 선언
-	JPanel moon_panel;
+	MyPanel my_panel = new MyPanel();
+	JPanel main_panel, moon_panel;
+	JLabel money_text;
 	JButton btn, btn2, btn3, btn4, moon;
 
 	public night_marimo() {
@@ -26,7 +29,10 @@ public class night_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임
 		setLocationRelativeTo(null);// 창이 가운데 나오게
 		main_panel = new JPanel(); // 패널 객체화 / 기본배치관리자 FlowLayout
 		moon_panel = new JPanel();
+		money_text = new JLabel("money : "+Integer.toString(My_marimo.get_money()), JLabel.CENTER);
+	    money_text.setPreferredSize(new Dimension(150,0));
 
+	    my_panel.setBounds(0, 0, 725, 980);
 		setLayout(null);
 		main_panel.setBounds(0, 780, 700, 200);
 		moon_panel.setBounds(0, 0, 170, 200);
@@ -64,17 +70,41 @@ public class night_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임
 		main_panel.add(btn4); // 패널에 버튼을 붙여준다
 		main_panel.add(btn); // 패널에 버튼을 붙여준다
 		main_panel.add(btn2); // 패널에 버튼을 붙여준다
-		moon_panel.add(moon);
 
-		add(main_panel); // 메인 프레임에 메인패널을 붙여주는 작업
-		add(moon_panel); // 메인 프레임에 썬패널 붙여주는 작업
+	    main_panel.setBackground(new Color(136, 199, 162, 255));
+	    moon_panel.setBackground(new Color(97,97,97));
+	    moon_panel.setLayout(new BorderLayout());
+	    moon_panel.add(moon, BorderLayout.WEST);
+	    moon_panel.add(money_text, BorderLayout.EAST);
+	      
+	    my_panel.setLayout(new BorderLayout());
+	    my_panel.add(moon_panel, BorderLayout.NORTH);
+	    my_panel.add(main_panel, BorderLayout.SOUTH);
+
+	    add(my_panel); // 메인 프레임에 메인패널을 붙여주는 작업
 		setVisible(true); // 프레임 보이게 하기
 	}
 
+	   class MyPanel extends JPanel{
+        @Override
+        public void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.drawImage(background,0,0,getWidth(),getHeight(),this);
+            g.drawImage(marimo,260,560,190,190,this);
+        }
+ }
 
-	public void paint(Graphics g) {// 그리는 함수
-		g.drawImage(background, 0, 0, null);// background를 그려줌
-		g.drawImage(marimo, 250, 580, null);
+	private Image img_buffer;
+	private Graphics buffer;
+	public void paint(Graphics g) {//그리는 함수
+		img_buffer = createImage(725,1024);
+		buffer = img_buffer.getGraphics();
+		paintComponents(buffer);
+		
+		buffer.drawImage(null,0,0,null);
+		
+		g.drawImage(img_buffer, 0,0,null);
+		repaint();
 	}
 
 	public static void main(String args[]) {
@@ -83,10 +113,20 @@ public class night_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn4) {
-			Shower_marimo a = new Shower_marimo();
-		}
-		if (e.getSource() == moon) {
-			day_marimo b = new day_marimo();
+			Shower_marimo shower = new Shower_marimo();
+			setVisible(false);
+		} else if (e.getSource() == moon) {
+			day_marimo c = new day_marimo();
+			setVisible(false);
+		} else if (e.getSource() == btn) {
+			Reallyboll_marimo a = new Reallyboll_marimo();
+			setVisible(false);
+		} else if (e.getSource() == btn2) {
+			Medicine_marimo b = new Medicine_marimo();
+			setVisible(false);
+		}else if (e.getSource() == btn3) {
+			eat_marimo c = new eat_marimo();
+			setVisible(false);
 		}
 	}
 }

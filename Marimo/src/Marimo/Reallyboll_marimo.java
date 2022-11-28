@@ -13,9 +13,10 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	private ImageIcon btn_img2 = new ImageIcon(Reallyboll_marimo.class.getResource("../img/icon_medicine.png"));
 	private ImageIcon btn_img3 = new ImageIcon(Reallyboll_marimo.class.getResource("../img/icon_refresh.png"));
 	private ImageIcon btn_img4 = new ImageIcon(Reallyboll_marimo.class.getResource("../img/icon_shower.png"));
+	private ImageIcon btn_sun = new ImageIcon(day_marimo.class.getResource("../img/sun.png"));
 	
 	JPanel main_panel; // 버튼을 붙여질 메인 패널 선언
-	//JPanel sun_panel;
+	JPanel sun_panel;
 	JButton btn, btn2, btn3, btn4, sun;
 	
 	public Reallyboll_marimo() {
@@ -28,11 +29,11 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);// 창이 가운데 나오게
 		main_panel = new JPanel(); // 패널 객체화 / 기본배치관리자 FlowLayout
-		//sun_panel = new JPanel();
+		sun_panel = new JPanel();
 
 		setLayout(null);
 		main_panel.setBounds(0, 780, 700, 200);
-		//sun_panel.setBounds(0, 0, 170, 200);
+		sun_panel.setBounds(0, 0, 170, 200);
 
 		JButton new_btn = new JButton("버튼");
 		// 버튼 생성
@@ -40,36 +41,37 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 		btn2 = new JButton(btn_img2);
 		btn3 = new JButton(btn_img3);
 		btn4 = new JButton(btn_img4);
+		sun = new JButton(btn_sun);
 
 		btn.setBorderPainted(false); // 버튼 테두리 설정해제
 		btn2.setBorderPainted(false); // 버튼 테두리 설정해제
 		btn3.setBorderPainted(false); // 버튼 테두리 설정해제
 		btn4.setBorderPainted(false); // 버튼 테두리 설정해제
-		//sun.setBorderPainted(false);
+		sun.setBorderPainted(false);
 
 		btn.setPreferredSize(new Dimension(160, 180)); // 버튼 크기 지정
 		btn2.setPreferredSize(new Dimension(170, 180)); // 버튼 크기 지정
 		btn3.setPreferredSize(new Dimension(150, 180)); // 버튼 크기 지정
 		btn4.setPreferredSize(new Dimension(185, 180)); // 버튼 크기 지정
-		//sun.setPreferredSize(new Dimension(170, 170));
+		sun.setPreferredSize(new Dimension(170, 170));
 
 		btn.setBackground(new Color(255, 255, 213)); // 축구공
 		btn2.setBackground(new Color(255, 255, 213)); // 약
 		btn3.setBackground(new Color(255, 255, 213)); // 냉장고
 		btn4.setBackground(new Color(255, 255, 213)); // 샤워
-		//sun.setBackground(new Color(97,97,97)); // 달
+		sun.setBackground(new Color(255,255,213)); // 달
 
 		btn4.addActionListener(this);
-		//sun.addActionListener(this);
+		sun.addActionListener(this);
 
 		main_panel.add(btn3); // 패널에 버튼을 붙여준다
 		main_panel.add(btn4); // 패널에 버튼을 붙여준다
 		main_panel.add(btn); // 패널에 버튼을 붙여준다
 		main_panel.add(btn2); // 패널에 버튼을 붙여준다
-		//sun_panel.add(sun);
+		sun_panel.add(sun);
 
 		add(main_panel); // 메인 프레임에 메인패널을 붙여주는 작업
-		//add(sun_panel); // 메인 프레임에 썬패널 붙여주는 작업
+		add(sun_panel); // 메인 프레임에 썬패널 붙여주는 작업
 		setVisible(true); // 프레임 보이게 하기
 	}
 	public void paint(Graphics g) {//그리는 함수
@@ -84,9 +86,11 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn4) {
 			Shower_marimo a = new Shower_marimo();
+			setVisible(false);
 		}
 		if (e.getSource() == sun) {
 			day_marimo b = new day_marimo();
+			setVisible(false);
 		}
 	}
 }

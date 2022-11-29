@@ -15,10 +15,10 @@ public class day_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 	private ImageIcon btn_img3 = new ImageIcon(day_marimo.class.getResource("../img/icon_refresh.png"));
 	private ImageIcon btn_img4 = new ImageIcon(day_marimo.class.getResource("../img/icon_shower.png"));
 	private ImageIcon btn_sun = new ImageIcon(day_marimo.class.getResource("../img/sun.png"));
-	
+
 	MyPanel my_panel = new MyPanel();
-	JPanel main_panel, sun_panel;
-	JLabel money_text;
+	JPanel main_panel, sun_panel, user_panel;
+	JLabel money_text, health;
 	JButton btn, btn2, btn3, btn4, sun;
 
 	public day_marimo() {
@@ -29,14 +29,18 @@ public class day_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		setLocationRelativeTo(null);// 창이 가운데 나오게
 		main_panel = new JPanel(); // 패널 객체화 / 기본배치관리자 FlowLayout
 		sun_panel = new JPanel();
-		money_text = new JLabel("money : "+Integer.toString(My_marimo.get_money()), JLabel.CENTER);
-	    money_text.setPreferredSize(new Dimension(150,0));
-	    
-	    my_panel.setBounds(0, 0, 725, 980);
+		money_text = new JLabel("money : " + Integer.toString(My_marimo.get_money()), JLabel.CENTER);
+		money_text.setPreferredSize(new Dimension(150, 0));
+		health = new JLabel("health : " + Integer.toString(My_marimo.get_health()), JLabel.CENTER);
+		health.setPreferredSize(new Dimension(150, 0));
+		user_panel = new JPanel();
+
+		my_panel.setBounds(0, 0, 725, 980);
 
 		setLayout(null);
 		main_panel.setBounds(0, 780, 700, 200);
 		sun_panel.setBounds(0, 0, 170, 200);
+		user_panel.setBounds(0, 0, 150, 170);
 
 		JButton new_btn = new JButton("버튼");
 		// 버튼 생성
@@ -63,6 +67,7 @@ public class day_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		btn3.setBackground(new Color(136, 199, 162, 255)); // 냉장고
 		btn4.setBackground(new Color(136, 199, 162, 255)); // 샤워
 		sun.setBackground(new Color(0, 206, 255));
+		user_panel.setBackground(new Color(0, 206, 255));
 
 		btn.addActionListener(this);
 		btn4.addActionListener(this);
@@ -76,38 +81,44 @@ public class day_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		main_panel.add(btn2); // 패널에 버튼을 붙여준다
 		sun_panel.add(sun);
 
-	      main_panel.setBackground(new Color(136, 199, 162, 255));
-	      sun_panel.setBackground(new Color(0, 206, 255));
-	      sun_panel.setLayout(new BorderLayout());
-	      sun_panel.add(sun, BorderLayout.WEST);
-	      sun_panel.add(money_text, BorderLayout.EAST);
-	      
-	      my_panel.setLayout(new BorderLayout());
-	      my_panel.add(sun_panel, BorderLayout.NORTH);
-	      my_panel.add(main_panel, BorderLayout.SOUTH);
+		main_panel.setBackground(new Color(136, 199, 162, 255));
+		sun_panel.setBackground(new Color(0, 206, 255));
+		
+		user_panel.setLayout(new GridLayout(2, 1));
+		user_panel.add(money_text);
+		user_panel.add(health);
 
-	      add(my_panel); // 메인 프레임에 메인패널을 붙여주는 작업
+		sun_panel.setLayout(new BorderLayout(0, 0));
+		sun_panel.add(sun, BorderLayout.WEST);
+		sun_panel.add(user_panel, BorderLayout.EAST);
+		my_panel.setLayout(new BorderLayout());
+		my_panel.add(sun_panel, BorderLayout.NORTH);
+		my_panel.add(main_panel, BorderLayout.SOUTH);
+
+		add(my_panel); // 메인 프레임에 메인패널을 붙여주는 작업
 		setVisible(true); // 프레임 보이게 하기
 	}
-	   class MyPanel extends JPanel{
-           @Override
-           public void paintComponent(Graphics g){
-               super.paintComponent(g);
-               g.drawImage(background,0,0,getWidth(),getHeight(),this);
-               g.drawImage(marimo,260,560,190,190,this);
-           }
-    }
+
+	class MyPanel extends JPanel {
+		@Override
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+			g.drawImage(marimo, 260, 560, 190, 190, this);
+		}
+	}
 
 	private Image img_buffer;
 	private Graphics buffer;
-	public void paint(Graphics g) {//그리는 함수
-		img_buffer = createImage(725,1024);
+
+	public void paint(Graphics g) {// 그리는 함수
+		img_buffer = createImage(725, 1024);
 		buffer = img_buffer.getGraphics();
 		paintComponents(buffer);
-		
-		buffer.drawImage(null,0,0,null);
-		
-		g.drawImage(img_buffer, 0,0,null);
+
+		buffer.drawImage(null, 0, 0, null);
+
+		g.drawImage(img_buffer, 0, 0, null);
 		repaint();
 	}
 
@@ -129,7 +140,7 @@ public class day_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		} else if (e.getSource() == btn2) {
 			Medicine_marimo b = new Medicine_marimo();
 			setVisible(false);
-		}else if (e.getSource() == btn3) {
+		} else if (e.getSource() == btn3) {
 			eat_marimo c = new eat_marimo();
 			setVisible(false);
 		}

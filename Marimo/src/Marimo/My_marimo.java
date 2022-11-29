@@ -1,20 +1,20 @@
 package Marimo;
 
 public class My_marimo {
-	private static int money = 0;
-	private static int health = 200;
+	private static int money = 10;
+	private static int health = 100;
 	private static int happy = 100;
 	private static int hungry = 0;
 	private static int d = 0;
 
 	static int happy_min = 0;
-	static int happy_max = 300;
-	static int health_min = -100;
+	static int happy_max = 200;
+	static int health_min = 0;
 	static int health_max = 200;
 	static int d_min = -200;
 	static int d_max = 0;
 	static int hungry_min = 0;
-	static int hungry_max = 0;
+	static int hungry_max = 100;
 
 	static int get_money() {
 		return money;
@@ -32,6 +32,10 @@ public class My_marimo {
 		if(health+h>health_max) health=health_max;
 		else if(health+h<health_min) health= health_min;
 		else health += h;
+		
+		if(health<=50) {
+			happy-=30;
+		}
 	}
 
 	static int get_happy() {

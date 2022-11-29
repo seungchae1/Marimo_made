@@ -18,7 +18,7 @@ public class day_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 
 	MyPanel my_panel = new MyPanel();
 	JPanel main_panel, sun_panel, user_panel;
-	JLabel money_text, health;
+	JLabel money_text, health, happy, hungry;
 	JButton btn, btn2, btn3, btn4, sun;
 
 	public day_marimo() {
@@ -33,6 +33,10 @@ public class day_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		money_text.setPreferredSize(new Dimension(150, 0));
 		health = new JLabel("health : " + Integer.toString(My_marimo.get_health()), JLabel.CENTER);
 		health.setPreferredSize(new Dimension(150, 0));
+		happy = new JLabel("happy : " + Integer.toString(My_marimo.get_happy()), JLabel.CENTER);
+		happy.setPreferredSize(new Dimension(150, 0));
+		hungry = new JLabel("hungry : " + Integer.toString(My_marimo.get_hungry()), JLabel.CENTER);
+		hungry.setPreferredSize(new Dimension(150, 0));
 		user_panel = new JPanel();
 
 		my_panel.setBounds(0, 0, 725, 980);
@@ -84,9 +88,11 @@ public class day_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		main_panel.setBackground(new Color(136, 199, 162, 255));
 		sun_panel.setBackground(new Color(0, 206, 255));
 		
-		user_panel.setLayout(new GridLayout(2, 1));
+		user_panel.setLayout(new GridLayout(4, 1));
 		user_panel.add(money_text);
 		user_panel.add(health);
+		user_panel.add(happy);
+		user_panel.add(hungry);
 
 		sun_panel.setLayout(new BorderLayout(0, 0));
 		sun_panel.add(sun, BorderLayout.WEST);

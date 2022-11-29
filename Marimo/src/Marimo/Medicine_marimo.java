@@ -22,7 +22,7 @@ public class Medicine_marimo extends JFrame/* ¿©±âÀÖ´Â ÀÌ¹ÌÁö¸¦ ÇÁ·¹ÀÓ¿¡ ±×·ÁÁÙ°
 	int sel = -1;
 
 	JPanel main_panel, sun_panel, m_panel, user_panel;
-	JLabel money_text, health;
+	JLabel money_text, health, happy, hungry;
 	JButton btn, btn2, btn3, btn4, sun, op1, op2, op3, eat_m;
 
 	public Medicine_marimo() {
@@ -40,6 +40,11 @@ public class Medicine_marimo extends JFrame/* ¿©±âÀÖ´Â ÀÌ¹ÌÁö¸¦ ÇÁ·¹ÀÓ¿¡ ±×·ÁÁÙ°
 		money_text.setPreferredSize(new Dimension(150, 0));
 		health = new JLabel("health : " + Integer.toString(My_marimo.get_health()), JLabel.CENTER);
 		health.setPreferredSize(new Dimension(150, 0));
+		happy = new JLabel("happy : " + Integer.toString(My_marimo.get_happy()), JLabel.CENTER);
+		happy.setPreferredSize(new Dimension(150, 0));
+		hungry = new JLabel("hungry : " + Integer.toString(My_marimo.get_hungry()), JLabel.CENTER);
+		hungry.setPreferredSize(new Dimension(150, 0));
+		
 		m_panel = new JPanel();
 		user_panel = new JPanel();
 
@@ -48,7 +53,7 @@ public class Medicine_marimo extends JFrame/* ¿©±âÀÖ´Â ÀÌ¹ÌÁö¸¦ ÇÁ·¹ÀÓ¿¡ ±×·ÁÁÙ°
 		sun_panel.setBounds(0, 0, 170, 200);
 		m_panel.setBounds(0, 0, 170, 200);
 		my_panel.setBounds(0, 0, 725, 980);
-		user_panel.setBounds(0, 0, 150, 170);
+		user_panel.setBounds(0, 0, 150, 300);
 
 		// ¹öÆ° »ý¼º
 		btn = new JButton(btn_img);
@@ -103,9 +108,11 @@ public class Medicine_marimo extends JFrame/* ¿©±âÀÖ´Â ÀÌ¹ÌÁö¸¦ ÇÁ·¹ÀÓ¿¡ ±×·ÁÁÙ°
 		sun_panel.setBackground(new Color(245, 161, 163));
 		m_panel.setBackground(new Color(245, 161, 163));
 
-		user_panel.setLayout(new GridLayout(2, 1));
+		user_panel.setLayout(new GridLayout(4, 1));
 		user_panel.add(money_text);
 		user_panel.add(health);
+		user_panel.add(happy);
+		user_panel.add(hungry);
 
 		sun_panel.setLayout(new BorderLayout(0, 0));
 		sun_panel.add(sun, BorderLayout.WEST);
@@ -212,8 +219,10 @@ public class Medicine_marimo extends JFrame/* ¿©±âÀÖ´Â ÀÌ¹ÌÁö¸¦ ÇÁ·¹ÀÓ¿¡ ±×·ÁÁÙ°
 			default:
 				break;
 			}
-			health.setText("health : " + Integer.toString(My_marimo.get_health()));
 			money_text.setText("money : " + Integer.toString(My_marimo.get_money()));
+			health.setText("health : " + Integer.toString(My_marimo.get_health()));
+			hungry.setText("hungry : " + Integer.toString(My_marimo.get_hungry()));
+			happy.setText("happy : " + Integer.toString(My_marimo.get_happy()));
 		}
 	}
 

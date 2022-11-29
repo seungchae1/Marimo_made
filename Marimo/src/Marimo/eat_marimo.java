@@ -23,7 +23,7 @@ public class eat_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 	int sel = -1;
 
 	JPanel main_panel, sun_panel, m_panel, user_panel;
-	JLabel money_text, health;
+	JLabel money_text, health, happy, hungry;
 	JButton btn, btn2, btn3, btn4, sun, op1, op2, op3, eat_m;
 
 	public eat_marimo() {
@@ -41,6 +41,10 @@ public class eat_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		money_text.setPreferredSize(new Dimension(150, 0));
 		health = new JLabel("health : " + Integer.toString(My_marimo.get_health()), JLabel.CENTER);
 		health.setPreferredSize(new Dimension(150, 0));
+		happy = new JLabel("happy : " + Integer.toString(My_marimo.get_happy()), JLabel.CENTER);
+		happy.setPreferredSize(new Dimension(150, 0));
+		hungry = new JLabel("hungry : " + Integer.toString(My_marimo.get_hungry()), JLabel.CENTER);
+		hungry.setPreferredSize(new Dimension(150, 0));
 		user_panel = new JPanel();
 		m_panel = new JPanel();
 
@@ -103,9 +107,11 @@ public class eat_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		sun_panel.setBackground(new Color(233, 225, 255, 255));
 		m_panel.setBackground(new Color(233, 225, 255, 255));
 
-		user_panel.setLayout(new GridLayout(2, 1));
+		user_panel.setLayout(new GridLayout(4, 1));
 		user_panel.add(money_text);
 		user_panel.add(health);
+		user_panel.add(happy);
+		user_panel.add(hungry);
 
 		sun_panel.setLayout(new BorderLayout(0, 0));
 		sun_panel.add(sun, BorderLayout.WEST);
@@ -178,6 +184,7 @@ public class eat_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		new eat_marimo();
 	}
 
+	int eat_cnt[]= {0,0,0};
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn4) { // 샤워
@@ -192,21 +199,35 @@ public class eat_marimo extends JFrame/* 여기있는 이미지를 프레임에 그려줄거임. 
 		} else if (e.getSource() == btn3) {
 			JOptionPaneEx();
 		} else if (e.getSource() == eat_m) {
-
 			switch (sel) {
 			case 0:
+				eat_cnt[sel]++;
+				if(eat_cnt[sel]>10)My_marimo.set_health(-10);
 				My_marimo.set_money(-20);
+				My_marimo.set_happy(20);
+				My_marimo.set_hungry(-20);
 				break;
 			case 1:
+				eat_cnt[sel]++;
+				if(eat_cnt[sel]>20)My_marimo.set_health(-10);
 				My_marimo.set_money(-50);
+				My_marimo.set_happy(40);
+				My_marimo.set_hungry(-30);
 				break;
 			case 2:
+				eat_cnt[sel]++;
+				if(eat_cnt[sel]>2)My_marimo.set_health(-5);
 				My_marimo.set_money(-40);
+				My_marimo.set_happy(30);
+				My_marimo.set_hungry(-40);
 				break;
 			default:
 				break;
 			}
 			money_text.setText("money : " + Integer.toString(My_marimo.get_money()));
+			health.setText("health : " + Integer.toString(My_marimo.get_health()));
+			hungry.setText("hungry : " + Integer.toString(My_marimo.get_hungry()));
+			happy.setText("happy : " + Integer.toString(My_marimo.get_happy()));
 		} else if (e.getSource() == btn2) {// 약
 			Medicine_marimo a = new Medicine_marimo();
 			setVisible(false);

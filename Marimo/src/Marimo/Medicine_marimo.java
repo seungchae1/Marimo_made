@@ -74,13 +74,13 @@ public class Medicine_marimo extends JFrame/* ¿©±âÀÖ´Â ÀÌ¹ÌÁö¸¦ ÇÁ·¹ÀÓ¿¡ ±×·ÁÁÙ°
 
 		eat_m.setFocusPainted(false);
 
-		btn.setBackground(new Color(255, 255, 213, 255)); // Ãà±¸°ø
-		btn2.setBackground(new Color(255, 255, 213, 255)); // ¾à
-		btn3.setBackground(new Color(255, 255, 213, 255)); // ³ÃÀå°í
-		btn4.setBackground(new Color(255, 255, 213, 255)); // »þ¿ö
-		sun.setBackground(new Color(255, 255, 213, 255));
-		eat_m.setBackground(new Color(255, 255, 213, 255));
-		user_panel.setBackground(new Color(255, 255, 213, 255));
+		btn.setBackground(new Color(245, 161, 163)); // Ãà±¸°ø
+		btn2.setBackground(new Color(245, 161, 163)); // ¾à
+		btn3.setBackground(new Color(245, 161, 163)); // ³ÃÀå°í
+		btn4.setBackground(new Color(245, 161, 163)); // »þ¿ö
+		sun.setBackground(new Color(245, 161, 163));
+		eat_m.setBackground(new Color(245, 161, 163));
+		user_panel.setBackground(new Color(245, 161, 163));
 
 		eat_m.addMouseListener(this);
 		eat_m.addActionListener(this);
@@ -88,6 +88,7 @@ public class Medicine_marimo extends JFrame/* ¿©±âÀÖ´Â ÀÌ¹ÌÁö¸¦ ÇÁ·¹ÀÓ¿¡ ±×·ÁÁÙ°
 		btn2.addActionListener(this);
 		btn3.addActionListener(this);
 		sun.addActionListener(this);
+		btn.addActionListener(this);
 
 		main_panel.add(btn3); // ÆÐ³Î¿¡ ¹öÆ°À» ºÙ¿©ÁØ´Ù
 		main_panel.add(btn4); // ÆÐ³Î¿¡ ¹öÆ°À» ºÙ¿©ÁØ´Ù
@@ -98,9 +99,9 @@ public class Medicine_marimo extends JFrame/* ¿©±âÀÖ´Â ÀÌ¹ÌÁö¸¦ ÇÁ·¹ÀÓ¿¡ ±×·ÁÁÙ°
 
 		m_panel.setBorder(BorderFactory.createEmptyBorder(200, 10, 10, 10)); // ¸¶¸®¸ð°¡ ÀÖ´Â panel¿¡ padding
 
-		main_panel.setBackground(new Color(255, 255, 213, 255));
-		sun_panel.setBackground(new Color(255, 255, 213, 255));
-		m_panel.setBackground(new Color(255, 255, 213, 255));
+		main_panel.setBackground(new Color(245, 161, 163));
+		sun_panel.setBackground(new Color(245, 161, 163));
+		m_panel.setBackground(new Color(245, 161, 163));
 
 		user_panel.setLayout(new GridLayout(2, 1));
 		user_panel.add(money_text);

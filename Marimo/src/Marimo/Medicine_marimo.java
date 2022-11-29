@@ -21,7 +21,7 @@ public class Medicine_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거
 	
 	int sel=-1;
 	
-	   JPanel main_panel, sun_panel, m_panel;
+	   JPanel main_panel, sun_panel, m_panel, user_panel;
 	   JLabel money_text, health;
 	   JButton btn, btn2, btn3, btn4, sun, op1, op2, op3, eat_m;
 	   public Medicine_marimo() {
@@ -40,12 +40,14 @@ public class Medicine_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거
 	      health= new JLabel("health : "+Integer.toString(My_marimo.get_health()), JLabel.CENTER);
 	      health.setPreferredSize(new Dimension(150,0));
 	      m_panel = new JPanel();
+	      user_panel = new JPanel();
 	      
 	      setLayout(null);
 	      main_panel.setBounds(0, 780, 700, 200);
 	      sun_panel.setBounds(0,0,170,200);
 	      m_panel.setBounds(0, 0, 170, 200);
 	      my_panel.setBounds(0, 0, 725, 980);
+	      user_panel.setBounds(0, 0, 150, 170);
 	      
 	      //버튼 생성
 	      btn = new JButton(btn_img);
@@ -77,6 +79,7 @@ public class Medicine_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거
 	      btn4.setBackground(new Color(255,255,213,255)); //샤워
 	      sun.setBackground(new Color(255,255,213,255));
 	      eat_m.setBackground(new Color(255,255,213,255));
+	      user_panel.setBackground(new Color(255,255,213,255));
 	      
 	      eat_m.addMouseListener(this);
 	      eat_m.addActionListener(this);
@@ -97,10 +100,14 @@ public class Medicine_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거
 	      main_panel.setBackground(new Color(255,255,213,255));
 	      sun_panel.setBackground(new Color(255,255,213,255));
 	      m_panel.setBackground(new Color(255,255,213,255));
+	      
+	      user_panel.setLayout(new GridLayout(2,1));
+	      user_panel.add(money_text);
+	      user_panel.add(health);
+	      
 	      sun_panel.setLayout(new BorderLayout(0,0));
 	      sun_panel.add(sun, BorderLayout.WEST);
-	      sun_panel.add(money_text, BorderLayout.EAST);
-	      sun_panel.add(health, BorderLayout.EAST);
+	      sun_panel.add(user_panel, BorderLayout.EAST);
 	      
 	      my_panel.setLayout(new BorderLayout(0,0));
 	      my_panel.add(sun_panel, BorderLayout.NORTH);
@@ -188,17 +195,21 @@ public class Medicine_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거
 	  		switch (sel) {
 	  		case 0:
 	  			My_marimo.set_health(+10);
+	  			My_marimo.set_money(-20);
 	  			break;
 	  		case 1:
 	  			My_marimo.set_health(+20);
+	  			My_marimo.set_money(-30);
 	  			break;
 	  		case 2:
 	  			My_marimo.set_health(+30);
+	  			My_marimo.set_money(-50);
 	  			break;
 	  		default:
 	  			break;
 	  		}
-  			money_text.setText("money : "+Integer.toString(My_marimo.get_health()));
+  			health.setText("health : "+Integer.toString(My_marimo.get_health()));
+  			money_text.setText("money : "+Integer.toString(My_marimo.get_money()));
 	      }
 	   }
 

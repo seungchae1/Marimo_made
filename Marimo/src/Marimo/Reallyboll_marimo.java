@@ -17,8 +17,8 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	private ImageIcon btn_sun = new ImageIcon(Reallyboll_marimo.class.getResource("../img/sun.png"));
 	int s_x= 270, s_y=630; //공 위치
 	
-	   JPanel main_panel, sun_panel;
-	   JLabel money_text;
+	   JPanel main_panel, sun_panel, user_panel;
+	   JLabel money_text, health;
 	   JButton btn, btn2, btn3, btn4, sun;
 	   public Reallyboll_marimo() {
 	      setTitle("마리모 키우기");//타이틀
@@ -33,12 +33,16 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	      sun_panel = new JPanel();
 	      money_text = new JLabel("money : "+Integer.toString(My_marimo.get_money()), JLabel.CENTER);
 	      money_text.setPreferredSize(new Dimension(150,0));
+	      health= new JLabel("health : "+Integer.toString(My_marimo.get_health()), JLabel.CENTER);
+	      health.setPreferredSize(new Dimension(150,0));
+	      user_panel = new JPanel();
 	      
 	      
 	      setLayout(null);
 	      main_panel.setBounds(0, 780, 700, 200);
 	      sun_panel.setBounds(0,0,170,200);
 	      my_panel.setBounds(0, 0, 725, 980);
+	      user_panel.setBounds(0, 0, 150, 170);
 	      
 	      //버튼 생성
 	      btn = new JButton(btn_img);
@@ -65,6 +69,7 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	      btn3.setBackground(new Color(255,255,213,255)); //냉장고
 	      btn4.setBackground(new Color(255,255,213,255)); //샤워
 	      sun.setBackground(new Color(255,255,213,255));
+	      user_panel.setBackground(new Color(255,255,213,255));
 	      
 	      sun.addActionListener(this);
 	      btn4.addActionListener(this);
@@ -76,12 +81,17 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 	      main_panel.add(btn4); // 패널에 버튼을 붙여준다
 	      main_panel.add(btn); // 패널에 버튼을 붙여준다
 	      main_panel.add(btn2); // 패널에 버튼을 붙여준다
-	      
+
 	      main_panel.setBackground(new Color(255,255,213,255));
 	      sun_panel.setBackground(new Color(255,255,213,255));
-	      sun_panel.setLayout(new BorderLayout());
+	      
+	      user_panel.setLayout(new GridLayout(2,1));
+	      user_panel.add(money_text);
+	      user_panel.add(health);
+	      
+	      sun_panel.setLayout(new BorderLayout(0,0));
 	      sun_panel.add(sun, BorderLayout.WEST);
-	      sun_panel.add(money_text, BorderLayout.EAST);
+	      sun_panel.add(user_panel, BorderLayout.EAST);
 	      
 	      my_panel.setLayout(new BorderLayout());
 	      my_panel.add(sun_panel, BorderLayout.NORTH);
@@ -157,9 +167,15 @@ public class Reallyboll_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄
 */
 		Moveball();
 	}
+	int click_cnt=0;
 	void Moveball() {
+		click_cnt++;
 		s_x=r2;
 		s_y=r;
+		if(click_cnt%12==0) {
+			My_marimo.set_happy(30);
+			money_text.setText("money : "+Integer.toString(My_marimo.get_money()));
+		}
 		/*
 		while(!(s_x+r2> 750 || s_x+r2< 0 ||s_y+r2> 1024|| s_y+r2< 0)||clickBall) {
 		    s_x += r2;

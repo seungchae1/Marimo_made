@@ -15,11 +15,11 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	private Image background=new ImageIcon(Reallyboll_marimo.class.getResource("../img/boll_marimo.png")).getImage();//배경이미지
 	private Image marimo = new ImageIcon(Reallyboll_marimo.class.getResource("../img/marimo.png")).getImage();
 	
-
-    private Connection conn; //DB 커넥션 연결 객체
+ //DB 커넥션 연결 객체
+	private static Connection conn;
     private static final String USERNAME = "root";//DBMS접속 시 아이디
     private static final String PASSWORD = "mirim";//DBMS접속 시 비밀번호
-    private static final String URL = "jdbc:mysql://localhost:3306/marimo_db?serverTimezone=UTC";//DBMS접속할 db명
+    private static final String URL = "jdbc:mysql://localhost:3306/marimo_db";//DBMS접속할 db명
 
 	private MyPanel loginPanel = new MyPanel();
 	private JLabel idLabel = new JLabel("아이디 ");
@@ -29,17 +29,6 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	private JButton loginBtn = new JButton("로그인");
 	
 	public Start_marimo() {
-
-		try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			System.out.println("드라이버 로딩 성공");
-        } catch (Exception e) {
-            System.out.println("드라이버 로딩 실패 ");
-            try {
-                conn.close();
-            } catch (SQLException e1) {    }
-        }
 		
 		setTitle("마리모 키우기");// 타이틀
 		setResizable(false);// 창의 크기를 변경하지 못하게
@@ -144,6 +133,15 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	
 	
 	public static void main(String[] args) {
+
+		try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql//10.96.122.55/testdb?serverTimezone=UTC","test","1111");
+
+            System.out.println("드라이버 로딩 성공");
+        } catch (Exception e) {
+            System.out.println("드라이버 로딩 실패 ");
+        }
 		new Start_marimo();
 	}
 

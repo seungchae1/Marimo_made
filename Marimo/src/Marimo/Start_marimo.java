@@ -15,12 +15,23 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	private Image background=new ImageIcon(Reallyboll_marimo.class.getResource("../img/boll_marimo.png")).getImage();//배경이미지
 	private Image marimo = new ImageIcon(Reallyboll_marimo.class.getResource("../img/marimo.png")).getImage();
 	
- //DB 커넥션 연결 객체
+	//DB 커넥션 연결 객체
+
+
+	/*
 	private static Connection conn;
     private static final String USERNAME = "root";//DBMS접속 시 아이디
     private static final String PASSWORD = "mirim";//DBMS접속 시 비밀번호
-    private static final String URL = "jdbc:mysql://localhost:3306/marimo_db";//DBMS접속할 db명
+    private static final String URL = "jdbc:mysql://localhost:3306/marimo_db?serverTimezone=UTC";//DBMS접속할 db명
+    */
 
+	static String driver = "com.mysql.cj.jdbc.Driver";
+	static String url = "jdbc:mysql://localhost:3306/";
+	static String dbname = "marimo_db?serverTimezone=UTC";
+	static String id = "marimo";
+	static String pwd = "Abcd123@";
+	static Connection conn = null;
+	
 	private MyPanel loginPanel = new MyPanel();
 	private JLabel idLabel = new JLabel("아이디 ");
 	private JLabel pwLabel = new JLabel("비밀번호 ");
@@ -62,18 +73,16 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 			//아이디 비번 확인 테스트 코드~
 			String id = idText.getText().trim();
 			String pw = pwText.getText().trim();
-			String sql = "select from marimo where id=?;";
+			String sql = "select * from marimo where id=?";
 	        PreparedStatement pstmt = null;
 	        try {
 		        pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, id);
-				ResultSet re = pstmt.executeQuery(sql);
+				ResultSet re = pstmt.executeQuery();
 				
-				ResultSetMetaData md = re.getMetaData() ;
-				int column = md.getColumnCount();
-				
-				if(column == 0) {
-					sql = "insert into marimo values(?,?,?,?,?);";
+				int row = re.getRow(); //행개수 계산
+				if(row == 0) {/*
+					sql = "insert into marimo values(?,?,?,?,?)";
 			        pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1,id);
 					pstmt.setString(2,pw);
@@ -81,10 +90,11 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 					pstmt.setInt(4,200);
 					pstmt.setInt(5,100);
 					pstmt.setInt(6,0);
-					pstmt.executeUpdate();
+					pstmt.executeUpdate();*/
+					JOptionPane.showMessageDialog(null, "아이디나 비밀번호가 틀렸습니다.", "다시 입력해주세요", JOptionPane.DEFAULT_OPTION);
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "다른 아이디를 이용해주세요", "이미 사용중인 아이디입니다.", JOptionPane.DEFAULT_OPTION);
+					JOptionPane.showMessageDialog(null, id+"님 환영합니다.",  "로그인 성공!", JOptionPane.DEFAULT_OPTION);
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -92,18 +102,11 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 			}
 			
 			
-
+	        
 			if(id.length()==0 || pw.length()==0) {
 			JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 입력 하셔야 됩니다.", "아이디나 비번을 입력하세요", JOptionPane.DEFAULT_OPTION);
 			return;
 			}
-
-			if(id.equals("test") && pw.equals("test1")) {
-			JOptionPane.showMessageDialog(null, "로그인 성공", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
-			return;
-			}
-
-			JOptionPane.showMessageDialog(null, "로그인 실패", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
 			}
 
 			});
@@ -133,15 +136,13 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	
 	
 	public static void main(String[] args) {
-
 		try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql//10.96.122.55/testdb?serverTimezone=UTC","test","1111");
-
-            System.out.println("드라이버 로딩 성공");
-        } catch (Exception e) {
-            System.out.println("드라이버 로딩 실패 ");
-        }
+			Class.forName(driver);
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/marimo_db?serverTimezone=UTC",id,pwd);
+			System.out.println("데이터 베이스 연결 성공!!");
+		} catch (Exception e) {
+			System.out.println("데이터 베이스 연결실패!!");
+		}
 		new Start_marimo();
 	}
 

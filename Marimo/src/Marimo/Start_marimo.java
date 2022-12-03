@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.*;
 
@@ -15,16 +16,7 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	private Image background=new ImageIcon(Reallyboll_marimo.class.getResource("../img/boll_marimo.png")).getImage();//배경이미지
 	private Image marimo = new ImageIcon(Reallyboll_marimo.class.getResource("../img/marimo.png")).getImage();
 	
-	//DB 커넥션 연결 객체
-
-
-	/*
-	private static Connection conn;
-    private static final String USERNAME = "root";//DBMS접속 시 아이디
-    private static final String PASSWORD = "mirim";//DBMS접속 시 비밀번호
-    private static final String URL = "jdbc:mysql://localhost:3306/marimo_db?serverTimezone=UTC";//DBMS접속할 db명
-    */
-
+	//DB
 	static String driver = "com.mysql.cj.jdbc.Driver";
 	static String url = "jdbc:mysql://localhost:3306/";
 	static String dbname = "marimo_db?serverTimezone=UTC";
@@ -38,6 +30,7 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	private JTextField idText = new JTextField();
 	private JPasswordField pwText = new JPasswordField();
 	private JButton loginBtn = new JButton("로그인");
+	private JButton joinBtn = new JButton("회원가입");
 	
 	public Start_marimo() {
 		
@@ -50,8 +43,10 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 		idText.setPreferredSize(new Dimension(200, 50));
 		pwText.setPreferredSize(new Dimension(200, 50));
 		loginBtn.setPreferredSize(new Dimension(200, 60));
+		joinBtn.setPreferredSize(new Dimension(200, 60));
+		
 		loginPanel.add(idLabel);
-
+		
 		loginPanel.add(idText);
 
 		loginPanel.add(pwLabel);
@@ -59,6 +54,7 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 		loginPanel.add(pwText);
 
 		loginPanel.add(loginBtn);
+		loginPanel.add(joinBtn);
 		
 		idLabel.setHorizontalAlignment(NORMAL);
 
@@ -66,52 +62,9 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 		
 		add(loginPanel);
 		
-		loginBtn.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-			//아이디 비번 확인 테스트 코드~
-			String id = idText.getText().trim();
-			String pw = pwText.getText().trim();
-			String sql = "select * from marimo where id=?";
-	        PreparedStatement pstmt = null;
-	        try {
-		        pstmt = conn.prepareStatement(sql);
-	            pstmt.setString(1, id);
-				ResultSet re = pstmt.executeQuery();
-				
-				int row = re.getRow(); //행개수 계산
-				if(row == 0) {/*
-					sql = "insert into marimo values(?,?,?,?,?)";
-			        pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1,id);
-					pstmt.setString(2,pw);
-					pstmt.setInt(3,0);
-					pstmt.setInt(4,200);
-					pstmt.setInt(5,100);
-					pstmt.setInt(6,0);
-					pstmt.executeUpdate();*/
-					JOptionPane.showMessageDialog(null, "아이디나 비밀번호가 틀렸습니다.", "다시 입력해주세요", JOptionPane.DEFAULT_OPTION);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, id+"님 환영합니다.",  "로그인 성공!", JOptionPane.DEFAULT_OPTION);
-				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			
-	        
-			if(id.length()==0 || pw.length()==0) {
-			JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 입력 하셔야 됩니다.", "아이디나 비번을 입력하세요", JOptionPane.DEFAULT_OPTION);
-			return;
-			}
-			}
-
-			});
-		
-	}
+		loginBtn.addActionListener(this);
+		joinBtn.addActionListener(this);
+	}	
 	 class MyPanel extends JPanel{
          @Override
          public void paintComponent(Graphics g){
@@ -147,8 +100,55 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		
+	public void actionPerformed(ActionEvent e) {
+		//아이디 비번 확인 테스트 코드~
+        try {
+			String id = idText.getText().trim();
+			String pw = pwText.getText().trim();
+        	if(id.length()==0 || pw.length()==0) {
+    		JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 입력 하셔야 됩니다.", "아이디나 비번을 입력하세요", JOptionPane.DEFAULT_OPTION);
+    		}
+			if(e.getSource() == loginBtn) {
+				Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		        ResultSet re = stmt.executeQuery("select * from marimo where id='"+id+"' and pass='"+pw+"';");
+				re.last();
+				int row = re.getRow(); //행개수 계산
+				re.beforeFirst();
+				if(row == 0) {
+					JOptionPane.showMessageDialog(null, "아이디나 비밀번호가 틀렸습니다.", "다시 입력해주세요", JOptionPane.DEFAULT_OPTION);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, id+"님 환영합니다.",  "로그인 성공!", JOptionPane.DEFAULT_OPTION);
+					day_marimo s = new day_marimo();
+					setVisible(false);
+				}
+			}
+			else if(e.getSource() == joinBtn) {
+		        Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		        ResultSet re = stmt.executeQuery("select * from marimo where id='"+id+"' and pass='"+pw+"';");
+				re.last();
+				int row = re.getRow(); //행개수 계산
+				if(row == 0) {
+			        PreparedStatement pstmt = null;
+					String sql = "insert into marimo values(?,?,?,?,?,?)";
+			        pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1,id);
+					pstmt.setString(2,pw);
+					pstmt.setInt(3,0);
+					pstmt.setInt(4,200);
+					pstmt.setInt(5,100);
+					pstmt.setInt(6,0);
+					pstmt.executeUpdate();
+					JOptionPane.showMessageDialog(null, "회원가입되었습니다.\n"+id+"님 환영합니다.",  "회원가입 성공!", JOptionPane.DEFAULT_OPTION);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "이미 사용중인 아이디입니다.",  "아이디 중복", JOptionPane.DEFAULT_OPTION);
+				}
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 

@@ -1,4 +1,4 @@
-package Marimo;
+package newMarimo;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,10 +12,9 @@ import java.sql.Statement;
 
 import javax.swing.*;
 
-public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.*/ implements ActionListener{
-	private Image background=new ImageIcon(Reallyboll_marimo.class.getResource("../img/boll_marimo.png")).getImage();//배경이미지
-	private Image marimo = new ImageIcon(Reallyboll_marimo.class.getResource("../img/marimo.png")).getImage();
-	
+import Marimo.day_marimo;
+
+public class Start_marimo extends JFrame implements ActionListener{
 	//DB
 	static String driver = "com.mysql.cj.jdbc.Driver";
 	static String url = "jdbc:mysql://localhost:3306/";
@@ -23,71 +22,71 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 	static String id = "marimo";
 	static String pwd = "Abcd123@";
 	static Connection conn = null;
+
+	static String user;
 	
-	private MyPanel loginPanel = new MyPanel();
-	private JLabel idLabel = new JLabel("아이디 ");
-	private JLabel pwLabel = new JLabel("비밀번호 ");
-	private JTextField idText = new JTextField();
-	private JPasswordField pwText = new JPasswordField();
-	private JButton loginBtn = new JButton("로그인");
-	private JButton joinBtn = new JButton("회원가입");
+	private JLabel background;
+	private myMarimo marimo; 
+	private JPanel login;
+	private JLabel idLabel;
+	private JLabel pwLabel;
+	private JTextField idText;
+	private JPasswordField pwText;
+	private JButton loginBtn;
+	private JButton joinBtn;
 	
 	public Start_marimo() {
-		
-		setTitle("마리모 키우기");// 타이틀
-		setResizable(false);// 창의 크기를 변경하지 못하게
-		setSize(725, 1024);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		initObject();
+		initSetting();
 		setVisible(true); // 프레임 보이게 하기
+		
+	}
+
+	private void initObject() {
+		background = new JLabel(new ImageIcon(Start_marimo.class.getResource("../img/boll_marimo.png")));
+		setContentPane(background);
+		login = new JPanel();
+		marimo = new myMarimo(260,300);
+		add(marimo);
+		
+		idLabel = new JLabel("아이디 ");
+		pwLabel = new JLabel("비밀번호 ");
+		idText = new JTextField();
+		pwText = new JPasswordField();
+		loginBtn = new JButton("로그인");
+		joinBtn = new JButton("회원가입");
+		
 		idText.setPreferredSize(new Dimension(200, 50));
 		pwText.setPreferredSize(new Dimension(200, 50));
 		loginBtn.setPreferredSize(new Dimension(200, 60));
 		joinBtn.setPreferredSize(new Dimension(200, 60));
 		
-		loginPanel.add(idLabel);
-		
-		loginPanel.add(idText);
-
-		loginPanel.add(pwLabel);
-
-		loginPanel.add(pwText);
-
-		loginPanel.add(loginBtn);
-		loginPanel.add(joinBtn);
+		login.add(idLabel);
+		login.add(idText);
+		login.add(pwLabel);
+		login.add(pwText);
+		login.add(loginBtn);
+		login.add(joinBtn);
 		
 		idLabel.setHorizontalAlignment(NORMAL);
 
 		pwLabel.setHorizontalAlignment(NORMAL);
 		
-		add(loginPanel);
-		
 		loginBtn.addActionListener(this);
 		joinBtn.addActionListener(this);
-	}	
-	 class MyPanel extends JPanel{
-         @Override
-         public void paintComponent(Graphics g){
-             super.paintComponent(g);
-             g.drawImage(background,0,0,getWidth(),getHeight(),this);
-             g.drawImage(marimo,260,200,190,190,this);
-         }
-	 }
-
-		private Image img_buffer;
-		private Graphics buffer;
-		public void paint(Graphics g) {//그리는 함수
-			img_buffer = createImage(725,1024);
-			buffer = img_buffer.getGraphics();
-			paintComponents(buffer);
-			
-			buffer.drawImage(null, 0, 0,null);
-			
-			g.drawImage(img_buffer, 0,0,null);
-			repaint();
-		}
-	
-	
+		login.setSize(700, 400);
+		login.setLocation(0, 500);
+		login.setBackground(new Color(255, 255, 213, 255));
+		add(login);
+		
+	}
+	private void initSetting() {
+		setTitle("마리모 키우기");// 타이틀
+		setResizable(false);// 창의 크기를 변경하지 못하게
+		setSize(725, 1024);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+	}
 	public static void main(String[] args) {
 		try {
 			Class.forName(driver);
@@ -101,9 +100,9 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//아이디 비번 확인 테스트 코드~
         try {
 			String id = idText.getText().trim();
+			user=id;
 			String pw = pwText.getText().trim();
         	if(id.length()==0 || pw.length()==0) {
     		JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 입력 하셔야 됩니다.", "아이디나 비번을 입력하세요", JOptionPane.DEFAULT_OPTION);
@@ -119,7 +118,7 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 				}
 				else {
 					JOptionPane.showMessageDialog(null, id+"님 환영합니다.",  "로그인 성공!", JOptionPane.DEFAULT_OPTION);
-					day_marimo s = new day_marimo();
+					new newDay();
 					setVisible(false);
 				}
 			}
@@ -134,10 +133,10 @@ public class Start_marimo extends JFrame/*여기있는 이미지를 프레임에 그려줄거임.
 			        pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1,id);
 					pstmt.setString(2,pw);
-					pstmt.setInt(3,0);
+					pstmt.setInt(3,10);
 					pstmt.setInt(4,200);
 					pstmt.setInt(5,100);
-					pstmt.setInt(6,0);
+					pstmt.setInt(6,50);
 					pstmt.executeUpdate();
 					JOptionPane.showMessageDialog(null, "회원가입되었습니다.\n"+id+"님 환영합니다.",  "회원가입 성공!", JOptionPane.DEFAULT_OPTION);
 				}

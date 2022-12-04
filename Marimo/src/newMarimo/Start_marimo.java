@@ -88,6 +88,7 @@ public class Start_marimo extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 	}
 	public static void main(String[] args) {
+		MusicPlay play = new MusicPlay();
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/marimo_db?serverTimezone=UTC",id,pwd);

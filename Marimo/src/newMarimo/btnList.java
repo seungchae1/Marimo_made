@@ -7,8 +7,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
-import Marimo.My_marimo;
-
 public class btnList extends JLabel implements MouseListener{
 	//JLabel을 버튼처럼 사용
 	

@@ -12,8 +12,6 @@ import java.sql.Statement;
 
 import javax.swing.*;
 
-import Marimo.day_marimo;
-
 public class Start_marimo extends JFrame implements ActionListener{
 	//DB
 	static String driver = "com.mysql.cj.jdbc.Driver";
